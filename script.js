@@ -54,7 +54,7 @@ let isMoving = false;
 const STEP_DELAY = 1000; // jeda antarpetak dalam milidetik
 
 const CHALLENGE_REWARD = 50;
-const CHALLENGE_PENALTY = 25;
+const CHALLENGE_PENALTY = 75;
 const CHALLENGE_QUESTION_COUNT = 3;
 
 let challengeQuestions = [];
