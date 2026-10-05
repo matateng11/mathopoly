@@ -50,6 +50,207 @@ let players;
 let currentPlayer;
 let pendingPurchase = null;
 let gameOver = false;
+let isMoving = false;
+const STEP_DELAY = 1000; // jeda antarpetak dalam milidetik
+
+const CHALLENGE_REWARD = 50;
+const CHALLENGE_PENALTY = 25;
+const CHALLENGE_QUESTION_COUNT = 3;
+
+let challengeQuestions = [];
+let challengeQuestionIndex = 0;
+let challengePlayerIndex = null;
+let challengeAnswered = false;
+
+const challengePopup = document.getElementById("challengePopup");
+const challengeProgress = document.getElementById("challengeProgress");
+const challengeQuestionEl = document.getElementById("challengeQuestion");
+const challengeOptionsEl = document.getElementById("challengeOptions");
+const challengeFeedback = document.getElementById("challengeFeedback");
+
+const challengeQuestionBank = [
+  // Logika diskrit
+  {
+    topic: "Negasi",
+    question: "Jika p adalah “Hari ini hujan”, apa negasi dari p?",
+    options: ["Hari ini tidak hujan", "Besok hujan", "Hari ini cerah dan hujan", "Hari ini mungkin hujan"],
+    answer: 0
+  },
+  {
+    topic: "Konjungsi",
+    question: "Konjungsi p ∧ q bernilai benar jika...",
+    options: ["p dan q keduanya benar", "p atau q benar", "p salah dan q benar", "p dan q keduanya salah"],
+    answer: 0
+  },
+  {
+    topic: "Disjungsi",
+    question: "Disjungsi p ∨ q bernilai salah jika...",
+    options: ["p dan q keduanya salah", "p dan q keduanya benar", "p benar saja", "q benar saja"],
+    answer: 0
+  },
+  {
+    topic: "Implikasi",
+    question: "Pernyataan p → q bernilai salah ketika...",
+    options: ["p benar dan q salah", "p salah dan q benar", "p dan q benar", "p dan q salah"],
+    answer: 0
+  },
+  {
+    topic: "Biimplikasi",
+    question: "Pernyataan p ↔ q bernilai benar ketika...",
+    options: ["Nilai kebenaran p dan q sama", "p selalu benar", "q selalu salah", "Nilai kebenaran p dan q berbeda"],
+    answer: 0
+  },
+
+  // Limit
+  {
+    topic: "Limit aljabar",
+    question: "Nilai lim x→2 (x + 3) adalah...",
+    options: ["5", "3", "2", "6"],
+    answer: 0
+  },
+  {
+    topic: "Limit aljabar",
+    question: "Nilai lim x→3 (x² − 9)/(x − 3) adalah...",
+    options: ["6", "3", "9", "0"],
+    answer: 0
+  },
+  {
+    topic: "Limit kanan",
+    question: "Limit kanan x→0⁺ dari f(x) = 1 jika x ≥ 0 dan f(x) = −1 jika x < 0 adalah...",
+    options: ["1", "−1", "0", "Tidak ada"],
+    answer: 0
+  },
+  {
+    topic: "Limit kiri",
+    question: "Limit kiri x→0⁻ dari f(x) = 1 jika x ≥ 0 dan f(x) = −1 jika x < 0 adalah...",
+    options: ["−1", "1", "0", "Tidak ada"],
+    answer: 0
+  },
+
+  // Matematika dasar SD–SMP
+  {
+    topic: "Matematika dasar",
+    question: "Hasil dari ¾ + ½ adalah...",
+    options: ["1¼", "1", "¾", "1½"],
+    answer: 0
+  },
+  {
+    topic: "Matematika dasar",
+    question: "Jika 3x + 5 = 20, nilai x adalah...",
+    options: ["5", "3", "8", "15"],
+    answer: 0
+  },
+  {
+    topic: "Matematika dasar",
+    question: "Sebuah barang seharga $80 mendapat diskon 25%. Berapa harga setelah diskon?",
+    options: ["$60", "$55", "$65", "$75"],
+    answer: 0
+  },
+  {
+    topic: "Matematika dasar",
+    question: "FPB dari 18 dan 24 adalah...",
+    options: ["6", "3", "8", "12"],
+    answer: 0
+  },
+
+  // Geometri bidang: titik dan garis
+  {
+    topic: "Geometri bidang",
+    question: "Berapa banyak garis yang dapat dibuat melalui dua titik berbeda?",
+    options: ["Tepat satu garis", "Dua garis", "Tidak ada garis", "Tak terhingga banyaknya"],
+    answer: 0
+  },
+  {
+    topic: "Geometri bidang",
+    question: "Dua garis pada satu bidang yang tidak pernah berpotongan disebut...",
+    options: ["Garis sejajar", "Garis tegak lurus", "Garis berpotongan", "Garis lengkung"],
+    answer: 0
+  },
+  {
+    topic: "Geometri bidang",
+    question: "Dua garis yang berpotongan membentuk sudut 90° disebut...",
+    options: ["Tegak lurus", "Sejajar", "Berimpit", "Miring"],
+    answer: 0
+  }
+];
+
+function startChallenge(player) {
+  challengePlayerIndex = players.indexOf(player);
+  challengeQuestionIndex = 0;
+  challengeAnswered = false;
+
+  // Ambil 3 soal acak tanpa mengulang soal dalam satu tantangan.
+  challengeQuestions = [...challengeQuestionBank]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, CHALLENGE_QUESTION_COUNT);
+
+  challengePopup.style.display = "flex";
+  showChallengeQuestion();
+}
+
+function showChallengeQuestion() {
+  const item = challengeQuestions[challengeQuestionIndex];
+
+  challengeAnswered = false;
+  challengeProgress.textContent =
+    `Soal ${challengeQuestionIndex + 1} dari ${CHALLENGE_QUESTION_COUNT} · ${item.topic}`;
+  challengeQuestionEl.textContent = item.question;
+  challengeFeedback.textContent = "";
+  challengeOptionsEl.innerHTML = "";
+
+  item.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "challenge-option";
+    button.textContent = `${String.fromCharCode(65 + index)}. ${option}`;
+    button.addEventListener("click", () => answerChallenge(index));
+    challengeOptionsEl.appendChild(button);
+  });
+}
+
+function answerChallenge(selectedIndex) {
+  if (challengeAnswered) return;
+  challengeAnswered = true;
+
+  const item = challengeQuestions[challengeQuestionIndex];
+  const player = players[challengePlayerIndex];
+  const buttons = challengeOptionsEl.querySelectorAll("button");
+
+  buttons.forEach(button => {
+    button.disabled = true;
+  });
+
+  if (selectedIndex === item.answer) {
+    player.money += CHALLENGE_REWARD;
+    challengeFeedback.textContent =
+      `Benar! Kamu mendapat $${CHALLENGE_REWARD}.`;
+    challengeFeedback.style.color = "green";
+  } else {
+    player.money = Math.max(0, player.money - CHALLENGE_PENALTY);
+    challengeFeedback.textContent =
+      `Salah. Jawaban yang benar: ${item.options[item.answer]}. Uang berkurang $${CHALLENGE_PENALTY}.`;
+    challengeFeedback.style.color = "crimson";
+  }
+
+  render();
+
+  // Beri waktu untuk membaca hasil, lalu tampilkan soal berikutnya.
+  setTimeout(() => {
+    challengeQuestionIndex++;
+
+    if (challengeQuestionIndex < CHALLENGE_QUESTION_COUNT) {
+      showChallengeQuestion();
+    } else {
+      finishChallenge();
+    }
+  }, 1200);
+}
+
+function finishChallenge() {
+  challengePopup.style.display = "none";
+  statusEl.textContent += " Tantangan selesai.";
+  finishTurn();
+}
 
 const boardEl = document.getElementById("board");
 const playersEl = document.getElementById("players");
@@ -64,6 +265,8 @@ function newGame() {
     { name: "Pemain 1", icon: "🔵", color: "#3498db",position: 0, money: startingMoney },
     { name: "Pemain 2", icon: "🔴", color: "#e74c3c", position: 0, money: startingMoney }
   ];
+
+  isMoving = false;
 
   tiles.forEach(tile => {
     tile.owner = null;
@@ -136,33 +339,57 @@ function render() {
     </div>
   `).join("");
 }
+
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function movePlayerStepByStep(player, steps) {
+  for (let step = 0; step < steps; step++) {
+    const nextPosition = (player.position + 1) % tiles.length;
+    const passedStart = nextPosition === 0 && player.position !== 0;
+
+    player.position = nextPosition;
+
+    if (passedStart) {
+      player.money += 200;
+      statusEl.textContent =
+        `${player.name} melewati Mulai dan mendapat $200.`;
+    } else {
+      statusEl.textContent =
+        `${player.name} bergerak ke petak ${player.position + 1}: ` +
+        `${tiles[player.position].name}.`;
+    }
+
+    render();
+    await wait(STEP_DELAY);
+  }
+}
+
+
 async function rollDice() {
-  if (gameOver || pendingPurchase !== null) return;
+  if (gameOver || pendingPurchase !== null || isMoving) return;
+
+  isMoving = true;
+  rollButton.disabled = true;
 
   const player = players[currentPlayer];
   const roll = Math.floor(Math.random() * 6) + 1;
-  const oldPosition = player.position;
-  const newPosition = (oldPosition + roll) % tiles.length;
 
+  statusEl.textContent = `${player.name} melempar dadu: ${roll}.`;
+  await wait(500);
 
-// Lanjutkan kode giliran berikutnya di bawah sini
+  // Pion terlihat bergerak satu petak demi satu petak.
+  await movePlayerStepByStep(player, roll);
 
-  let message = "";
+  const tile = tiles[player.position];
+  let message = `${player.name} melempar ${roll} dan mendarat di ${tile.name}.`;
 
-  if (oldPosition + roll >= tiles.length) {
-    player.money += 200;
-    message = `${player.name} mendapat $100 karena melewati Mulai. `;
-  }
-
-  player.position = newPosition;
-  const tile = tiles[newPosition];
-
-  message += `${player.name} melempar ${roll} dan mendarat di ${tile.name}.`;
-
-    if (["property", "railroad", "utility"].includes(tile.type)) {
+  if (["property", "railroad", "utility"].includes(tile.type)) {
     if (tile.owner === null) {
+      isMoving = false;
       statusEl.textContent = message;
-      askPurchaseQuestion(tile, newPosition);
+      askPurchaseQuestion(tile, player.position);
       return;
     }
 
@@ -184,13 +411,24 @@ async function rollDice() {
     const card = drawCommunityCard(player);
     showCommunityPopup(card);
     message += ` ${card.text}`;
+  } else if (tile.type === "chance") {
+    statusEl.textContent = message;
+    render();
+    isMoving = false;
+    startChallenge(player);
+    return;
   } else if (tile.type === "tax") {
     const tax = Math.min(tile.amount, player.money);
     player.money -= tax;
     message += ` Kamu membayar pajak $${tax}.`;
+  } else if (tile.type === "goToJail") {
+    // Petak Ruang Kepala Sekolah: pindah ke petak Ruang Disiplin.
+    player.position = 10;
+    message += " Langsung menuju Ruang Disiplin.";
   }
 
   statusEl.textContent = message;
+  isMoving = false;
   finishTurn();
 }
 
@@ -300,7 +538,8 @@ function showCommunityPopup(card) {
 
   document.getElementById("communityOk").addEventListener("click", () => {
   document.getElementById("communityPopup").style.display = "none";
-  });
+  finishTurn();
+});
 
 
 questionForm.addEventListener("submit", event => {
@@ -333,6 +572,8 @@ questionForm.addEventListener("submit", event => {
 });
 
 function finishTurn() {
+  isMoving = false;
+
   const bankruptPlayer = players.find(player => player.money <= 0);
 
   if (bankruptPlayer) {
