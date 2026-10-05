@@ -4,36 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Monopoli Matematika</title>
+
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
   <main class="app">
     <header>
-      <h1>🎲 Monopoli Matematika</h1>
+      <h1>🎲 MATHOPOLY (Monopoli Matematika)</h1>
       <p>Jawab soal, beli properti, dan kumpulkan uang!</p>
     </header>
 
-    <div class="board-wrap">
-      <section class="board" id="board" aria-label="Papan permainan"></section>
-    </div>
-
-    <div class="board-area">
-      <section class="board" id="board" aria-label="Papan permainan"></section>
-        <aside class="panel">
-          <!-- isi panel permainan -->
-        </aside>
-    </div>
-
     <div class="layout">
-      <section class="board" id="board" aria-label="Papan permainan"></section>
+      <div class="board-wrap">
+        <section
+          class="board"
+          id="board"
+          aria-label="Papan permainan"
+        ></section>
+      </div>
 
       <aside class="panel">
         <h2>Permainan</h2>
+
         <div class="players" id="players"></div>
 
-        <button id="rollButton">Lempar Dadu</button>
-        <button class="secondary" id="resetButton">Mulai Ulang</button>
+        <button id="rollButton" type="button">Lempar Dadu</button>
+        <button class="secondary" id="resetButton" type="button">
+          Mulai Ulang
+        </button>
 
         <div class="status" id="status" aria-live="polite">
           Giliran Pemain 1. Lempar dadu untuk mulai!
@@ -41,9 +40,11 @@
 
         <form class="question" id="questionForm">
           <p id="questionText"></p>
+
           <div class="answer-row">
             <input
               id="answerInput"
+              name="answer"
               type="number"
               inputmode="numeric"
               placeholder="Jawaban"
@@ -51,17 +52,29 @@
             />
             <button type="submit">Jawab</button>
           </div>
+
           <p class="hint">Jawab benar untuk membeli properti.</p>
         </form>
       </aside>
     </div>
   </main>
-    <div id="communityPopup" class="community-overlay">
+
+  <div id="communityPopup" class="community-overlay">
     <div class="community-box">
       <h2 id="communityTitle"></h2>
       <p id="communityDescription"></p>
-      <button id="communityOk">Oke</button>
+      <button id="communityOk" type="button">Oke</button>
     </div>
-    </div>  
+  </div>
+
+  <div id="challengePopup" class="popup-overlay">
+    <div class="popup-card">
+      <h2 id="challengeTitle">Kartu Tantangan</h2>
+      <p id="challengeProgress"></p>
+      <p id="challengeQuestion"></p>
+      <div id="challengeOptions"></div>
+      <p id="challengeFeedback"></p>
+    </div>
+  </div>
 </body>
 </html>
