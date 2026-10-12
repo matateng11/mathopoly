@@ -51,7 +51,7 @@ let currentPlayer;
 let pendingPurchase = null;
 let gameOver = false;
 let isMoving = false;
-const STEP_DELAY = 1000; // jeda antarpetak dalam milidetik
+const STEP_DELAY = 1000; // ini jeda gerakan
 
 const CHALLENGE_REWARD = 50;
 const CHALLENGE_PENALTY = 75;
@@ -68,6 +68,7 @@ const challengeQuestionEl = document.getElementById("challengeQuestion");
 const challengeOptionsEl = document.getElementById("challengeOptions");
 const challengeFeedback = document.getElementById("challengeFeedback");
 
+  //soalsoal buat kartu tantangan
 const challengeQuestionBank = [
   // Logika diskrit
   {
@@ -174,6 +175,18 @@ const challengeQuestionBank = [
   }
 ];
 
+const diceIcons = [
+  "fa-dice-one",
+  "fa-dice-two",
+  "fa-dice-three",
+  "fa-dice-four",
+  "fa-dice-five",
+  "fa-dice-six"
+];
+
+const diceIconEl = document.getElementById("diceIcon");
+const diceResultEl = document.getElementById("diceResult");
+
 function startChallenge(player) {
   challengePlayerIndex = players.indexOf(player);
   challengeQuestionIndex = 0;
@@ -271,6 +284,9 @@ function newGame() {
   tiles.forEach(tile => {
     tile.owner = null;
   });
+
+  diceIconEl.className = "fas fa-dice-one";
+  diceResultEl.textContent = "—";
 
   currentPlayer = 0;
   pendingPurchase = null;
@@ -375,6 +391,8 @@ async function rollDice() {
 
   const player = players[currentPlayer];
   const roll = Math.floor(Math.random() * 6) + 1;
+  diceIconEl.className = `fas ${diceIcons[roll - 1]}`;
+  diceResultEl.textContent = roll;
 
   statusEl.textContent = `${player.name} melempar dadu: ${roll}.`;
   await wait(500);
@@ -434,15 +452,15 @@ async function rollDice() {
 
 function getBoardPosition(index) {
   if (index <= 10) {
-    return { gridColumn: 10 - index + 1, gridRow: 10 };
+    return { gridColumn: 11 - index, gridRow: 10 };
   }
   if (index <= 20) {
-    return { gridColumn: 1, gridRow: 10 - (index -10) };
+    return { gridColumn: 1, gridRow: 20 - index };
   }
   if (index <= 30) {
-    return { gridColumn: index - 20, gridRow: 1 };
+    return { gridColumn: index - 19, gridRow: 1 };
   }
-  return { gridColumn: 10, gridRow: index - 30 };
+  return { gridColumn: 10, gridRow: index - 29 };
 }
 
 function askPurchaseQuestion(tile, tileIndex) {
