@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Monopoli Matematika</title>
+  <title>MATHOPOLY</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
@@ -12,7 +13,7 @@
   <main class="app">
     <header>
       <h1>🎲 MATHOPOLY (Monopoli Matematika)</h1>
-      <p>Jawab soal, beli properti, dan kumpulkan uang!</p>
+      <h5>Jawab soal, beli properti, dan kumpulkan uang!</h5>
     </header>
 
     <div class="layout">
@@ -28,6 +29,10 @@
         <h2>Permainan</h2>
 
         <div class="players" id="players"></div>
+          <div class="dice-display" aria-live="polite">
+            <i id="diceIcon" class="fas fa-dice-one" aria-label="Dadu"></i>
+            <span id="diceResult">—</span>
+          </div>
 
         <button id="rollButton" type="button">Lempar Dadu</button>
         <button class="secondary" id="resetButton" type="button">
