@@ -17,7 +17,9 @@ body {
   min-height: 100vh;
   margin: 0;
   padding: 24px;
-  background: var(--bg);
+  background:
+    linear-gradient(hsla(0, 0%, 100%, 0.75), rgba(242, 246, 243, 0)),
+    url("gambar/background.jpg") center / cover no-repeat fixed;
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -64,6 +66,9 @@ header p {
 
 .board {
   display: grid;
+  background:
+    linear-gradient(hsla(0, 0%, 100%, 0.75), rgba(250, 253, 251, 0)),
+    url("gambar/midle.png") center / cover no-repeat scroll;
   width: 100%;
   min-width: 0;
   aspect-ratio: 1;
@@ -403,5 +408,41 @@ input:focus {
 
   .panel {
     padding: 16px;
+  }
+}
+
+.dice-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 12px 0;
+  color: var(--green);
+}
+
+.dice-display i {
+  font-size: 64px;
+  animation: diceRoll 0.45s ease;
+}
+
+.dice-display span {
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+@keyframes diceRoll {
+  from {
+    transform: rotate(180deg) scale(0.5);
+    opacity: 0.4;
+  }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 600px) {
+  .dice-display i {
+    font-size: 48px;
   }
 }
