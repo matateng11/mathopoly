@@ -429,7 +429,7 @@ button.secondary:hover:not(:disabled) {
   }
 }
 
-
+/* papan di atas, pemain dan dadu di bawah */
 .layout {
   display: flex;
   flex-direction: column;
@@ -441,18 +441,19 @@ button.secondary:hover:not(:disabled) {
   width: 100%;
 }
 
+/* daftar pemain (kanan-kiri) */
 .players {
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
-
+/* petak lebih ringkas di hp */
 @media (max-width: 600px) {
   .panel {
     padding: 16px;
   }
 }
 
-/* Papan tetap berukuran nyaman dan bisa digeser di layar kecil */
+/* Papan bisa digeser di layar kecil */
 .board-wrap {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -460,10 +461,9 @@ button.secondary:hover:not(:disabled) {
 
 .board {
   min-width: 700px;
-  aspect-ratio: 1;
 }
 
-/* Tulisan dan pion lebih mudah terlihat di HP */
+/* kemudahan di HP */
 @media (max-width: 600px) {
   .tile {
     padding: 5px;
@@ -493,5 +493,29 @@ button.secondary:hover:not(:disabled) {
     font-size: 18px;
     line-height: 1;
     text-shadow: 0 1px 2px #fff;
+  }
+}
+
+@media (max-width: 600px) {
+  .board .tile,
+  .board .cell {
+    position: relative;
+    min-width: 64px;
+    min-height: 64px;
+    overflow: visible;
+  }
+
+  .board .tile-name,
+  .board .cell-name,
+  .board .name {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    color: #111 !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    z-index: 2;
   }
 }
