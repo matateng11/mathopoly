@@ -451,3 +451,47 @@ button.secondary:hover:not(:disabled) {
     padding: 16px;
   }
 }
+
+/* Papan tetap berukuran nyaman dan bisa digeser di layar kecil */
+.board-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.board {
+  min-width: 700px;
+  aspect-ratio: 1;
+}
+
+/* Tulisan dan pion lebih mudah terlihat di HP */
+@media (max-width: 600px) {
+  .tile {
+    padding: 5px;
+    border-width: 2px;
+    border-radius: 7px;
+  }
+
+  .tile-name {
+    font-size: 11px;
+    line-height: 1.15;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .tile-info,
+  .tile-owner {
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .tokens {
+    gap: 2px;
+  }
+
+  .token {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 1;
+    text-shadow: 0 1px 2px #fff;
+  }
+}
