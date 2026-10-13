@@ -18,8 +18,8 @@ body {
   margin: 0;
   padding: 24px;
   background:
-    linear-gradient(hsla(0, 0%, 100%, 0.75), rgba(242, 246, 243, 0)),
-    url("background.jpg") center / cover no-repeat fixed;
+    linear-gradient(rgba(255, 255, 255, 0.82), rgba(242, 246, 243, 0.94)),
+    url("background.jpg") center / cover fixed;
   color: var(--text);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
@@ -45,19 +45,17 @@ header p {
   color: var(--muted);
 }
 
-/* Papan dan panel permainan */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   align-items: start;
-  width: 100%;
 }
 
 .board-wrap {
   width: 100%;
   min-width: 0;
-  overflow: visible;
+  overflow: hidden;
   border: 1px solid var(--border);
   border-radius: 16px;
   background: var(--card);
@@ -66,19 +64,17 @@ header p {
 
 .board {
   display: grid;
-  background:
-    linear-gradient(hsla(0, 0%, 100%, 0.75), rgba(250, 253, 251, 0)),
-    url("midle.png") center / cover no-repeat scroll;
   width: 100%;
-  min-width: 0;
   aspect-ratio: 1;
   grid-template-columns: repeat(10, minmax(0, 1fr));
   grid-template-rows: repeat(10, minmax(0, 1fr));
   gap: 6px;
   padding: 12px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+    url("midle.png") center / cover;
 }
 
-/* Kotak-kotak papan */
 .tile {
   position: relative;
   display: flex;
@@ -99,39 +95,37 @@ header p {
 }
 
 .tile-name {
-  font-size: clamp(0.5rem, 1vw, 0.82rem);
+  font-size: clamp(0.45rem, 0.9vw, 0.82rem);
   font-weight: 750;
   line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
-.tile-info {
+.tile-info,
+.tile-owner {
+  margin-top: 3px;
   color: var(--muted);
-  font-size: clamp(0.45rem, 0.85vw, 0.72rem);
+  font-size: clamp(0.4rem, 0.75vw, 0.7rem);
   line-height: 1.2;
   overflow-wrap: anywhere;
 }
 
 .tile-owner {
-  color: var(--green);
-  font-size: clamp(0.45rem, 0.8vw, 0.7rem);
+  color: var(--green-dark);
   font-weight: 700;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
 }
 
 .tokens {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 5px;
+  gap: 3px;
+  margin-top: 4px;
 }
 
 .token {
-  font-size: 1rem;
+  font-size: clamp(0.65rem, 1.2vw, 1rem);
 }
 
-/* Panel */
 .panel {
   width: 100%;
   padding: 20px;
@@ -143,6 +137,44 @@ header p {
 
 .panel h2 {
   margin: 0;
+}
+
+.player-setup {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.player-setup label {
+  font-weight: 700;
+}
+
+.player-setup select,
+input {
+  width: 100%;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--text);
+  font: inherit;
+}
+
+.player-names {
+  display: grid;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.player-name-field {
+  display: grid;
+  gap: 4px;
+}
+
+.player-name-field label {
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .players {
@@ -176,14 +208,13 @@ header p {
   font-size: 0.9rem;
 }
 
-/* Tombol */
 button {
   width: 100%;
   padding: 12px 14px;
   border: 0;
   border-radius: 10px;
   background: var(--green);
-  color: #ffffff;
+  color: #fff;
   font: inherit;
   font-weight: 750;
   cursor: pointer;
@@ -206,7 +237,7 @@ button:disabled {
 button.secondary {
   margin-top: 9px;
   border: 1px solid var(--border);
-  background: #ffffff;
+  background: #fff;
   color: var(--text);
 }
 
@@ -214,7 +245,6 @@ button.secondary:hover:not(:disabled) {
   background: #f4f7f5;
 }
 
-/* Status permainan */
 .status {
   min-height: 58px;
   margin: 14px 0;
@@ -225,7 +255,36 @@ button.secondary:hover:not(:disabled) {
   line-height: 1.45;
 }
 
-/* Form soal */
+.dice-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+  color: var(--green);
+}
+
+.dice-display i {
+  font-size: 56px;
+  animation: diceRoll 0.45s ease;
+}
+
+.dice-display span {
+  font-size: 1.5rem;
+  font-weight: 750;
+}
+
+@keyframes diceRoll {
+  from {
+    transform: rotate(180deg) scale(0.5);
+    opacity: 0.4;
+  }
+  to {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
 .question {
   display: none;
   margin-top: 14px;
@@ -248,50 +307,47 @@ button.secondary:hover:not(:disabled) {
   gap: 8px;
 }
 
-input {
-  min-width: 0;
-  flex: 1;
-  padding: 11px;
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  font: inherit;
-}
-
-input:focus {
-  outline: 2px solid #176b4d40;
-  border-color: var(--green);
-}
-
 .answer-row button {
   width: auto;
 }
 
 .hint {
-  margin: 9px 0 0;
+  margin: 9px 0 0 !important;
   color: var(--muted);
   font-size: 0.8rem;
+  font-weight: 400 !important;
 }
 
-/* Popup kartu komunitas */
-.community-overlay {
+.community-overlay,
+.popup-overlay {
   position: fixed;
   inset: 0;
-  z-index: 9999;
+  z-index: 1000;
   display: none;
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: rgba(0, 80, 40, 0.55);
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.community-overlay {
+  z-index: 1001;
+}
+
+.community-box,
+.popup-card {
+  width: min(500px, 100%);
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: var(--text);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .community-box {
-  width: min(420px, 100%);
-  padding: 28px;
-  border-radius: 16px;
   background: #075b32;
-  color: #ffffff;
+  color: #fff;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .community-box h2 {
@@ -306,33 +362,8 @@ input:focus {
 .community-box button {
   width: auto;
   padding: 10px 28px;
-  background: #ffffff;
+  background: #fff;
   color: #075b32;
-}
-
-.community-box button:hover:not(:disabled) {
-  background: #eaf5ee;
-}
-
-/* Popup tantangan */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.65);
-}
-
-.popup-card {
-  width: min(500px, 100%);
-  padding: 24px;
-  border-radius: 14px;
-  background: #ffffff;
-  color: #222222;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .popup-card h2 {
@@ -347,11 +378,10 @@ input:focus {
 
 .challenge-option {
   padding: 12px;
-  border: 1px solid #bbbbbb;
+  border: 1px solid var(--border);
   border-radius: 8px;
-  background: #f5f5f5;
+  background: #f5f8f6;
   color: var(--text);
-  cursor: pointer;
   text-align: left;
 }
 
@@ -359,27 +389,24 @@ input:focus {
   background: #e5efff;
 }
 
-.challenge-option:disabled {
-  cursor: default;
-}
-
 #challengeFeedback {
   min-height: 24px;
   font-weight: 700;
 }
 
-/* Tablet dan ponsel */
+@media (min-width: 1000px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+}
+
 @media (max-width: 600px) {
   body {
-    padding: 14px;
+    padding: 12px;
   }
 
   header {
-    margin-bottom: 18px;
-  }
-
-  .layout {
-    gap: 14px;
+    margin-bottom: 16px;
   }
 
   .board {
@@ -393,56 +420,34 @@ input:focus {
     border-radius: 5px;
   }
 
-  .tile-name {
-    font-size: clamp(0.4rem, 1.8vw, 0.65rem);
-  }
-
-  .tile-info,
-  .tile-owner {
-    font-size: clamp(0.38rem, 1.5vw, 0.58rem);
-  }
-
-  .token {
-    font-size: 0.75rem;
-  }
-
   .panel {
     padding: 16px;
   }
+
+  .dice-display i {
+    font-size: 46px;
+  }
 }
 
-.dice-display {
+
+.layout {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 12px 0;
-  color: var(--green);
+  flex-direction: column;
+   gap: 16px;
 }
 
-.dice-display i {
-  font-size: 64px;
-  animation: diceRoll 0.45s ease;
+.board-wrap,
+.panel {
+  width: 100%;
 }
 
-.dice-display span {
-  font-size: 1.5rem;
-  font-weight: 750;
+.players {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
 }
 
-@keyframes diceRoll {
-  from {
-    transform: rotate(180deg) scale(0.5);
-    opacity: 0.4;
-  }
-  to {
-    transform: rotate(0) scale(1);
-    opacity: 1;
-  }
-}
 
 @media (max-width: 600px) {
-  .dice-display i {
-    font-size: 48px;
+  .panel {
+    padding: 16px;
   }
 }
