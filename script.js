@@ -34,7 +34,7 @@ const playerColors = [
   "#9b59b6", "#e67e22", "#34495e", "#95a5a6"
 ];
 
-const STARTING_MONEY = 1500;
+const STARTING_MONEY = 1000;
 const STEP_DELAY = 350;
 const CHALLENGE_REWARD = 50;
 const CHALLENGE_PENALTY = 75;
@@ -51,48 +51,48 @@ const diceIcons = [
 
 const tiles = [
   { name: "Mulai Belajar", type: "start", info: "Lewat: +$200" },
-  { name: "Kelas Aljabar", type: "property", price: 60, rent: 2 },
+  { name: "Kelas Aljabar", type: "property", price: 90, rent: 20 },
   { name: "Dana Beasiswa", type: "community", info: "Ambil kartu" },
-  { name: "Ruang Aritmetika", type: "property", price: 60, rent: 4 },
+  { name: "Ruang Aritmetika", type: "property", price: 90, rent: 30 },
   { name: "Pajak Praktikum", type: "tax", amount: 200 },
-  { name: "Stasiun Ilmu", type: "railroad", price: 200, rent: 25 },
-  { name: "Kelas Geometri", type: "property", price: 100, rent: 6 },
+  { name: "Stasiun Ilmu", type: "railroad", price: 200, rent: 50 },
+  { name: "Kelas Geometri", type: "property", price: 100, rent: 50 },
   { name: "Kartu Tantangan", type: "chance", info: "Ambil kartu" },
-  { name: "Laboratorium Sains", type: "property", price: 100, rent: 6 },
-  { name: "Perpustakaan Dasar", type: "property", price: 120, rent: 8 },
+  { name: "Laboratorium Sains", type: "property", price: 100, rent: 40 },
+  { name: "Perpustakaan Dasar", type: "property", price: 120, rent: 40 },
 
   { name: "Ruang Disiplin", type: "jail", info: "Hanya berkunjung" },
-  { name: "Kelas Trigonometri", type: "property", price: 140, rent: 10 },
+  { name: "Kelas Trigonometri", type: "property", price: 200, rent: 30 },
   { name: "Pembangkit Listrik Kampus", type: "utility", price: 150, rent: 0 },
-  { name: "Ruang Kalkulus", type: "property", price: 140, rent: 10 },
-  { name: "Laboratorium Komputer", type: "property", price: 160, rent: 12 },
-  { name: "Stasiun Pengetahuan", type: "railroad", price: 200, rent: 25 },
-  { name: "Kelas Statistika", type: "property", price: 180, rent: 14 },
+  { name: "Ruang Kalkulus", type: "property", price: 200, rent: 50 },
+  { name: "Laboratorium Komputer", type: "property", price: 180, rent: 30 },
+  { name: "Stasiun Pengetahuan", type: "railroad", price: 200, rent: 40 },
+  { name: "Kelas Statistika", type: "property", price: 180, rent: 50 },
   { name: "Dana Beasiswa", type: "community", info: "Ambil kartu" },
-  { name: "Ruang Persamaan", type: "property", price: 180, rent: 14 },
-  { name: "Perpustakaan Matematika", type: "property", price: 200, rent: 16 },
+  { name: "Ruang Persamaan", type: "property", price: 180, rent: 40 },
+  { name: "Perpustakaan Matematika", type: "property", price: 200, rent: 40 },
 
   { name: "Waktu Istirahat", type: "free", info: "Istirahat" },
-  { name: "Kelas Matematika Diskrit", type: "property", price: 220, rent: 18 },
+  { name: "Kelas Matematika Diskrit", type: "property", price: 220, rent: 70 },
   { name: "Kartu Tantangan", type: "chance", info: "Ambil kartu" },
-  { name: "Laboratorium Robotika", type: "property", price: 220, rent: 18 },
-  { name: "Ruang Teori Bilangan", type: "property", price: 240, rent: 20 },
-  { name: "Stasiun Akademik", type: "railroad", price: 200, rent: 25 },
-  { name: "Kelas Aljabar Linear", type: "property", price: 260, rent: 22 },
-  { name: "Pusat Riset Matematika", type: "property", price: 260, rent: 22 },
+  { name: "Laboratorium Robotika", type: "property", price: 220, rent: 75 },
+  { name: "Ruang Teori Bilangan", type: "property", price: 240, rent: 65 },
+  { name: "Stasiun Akademik", type: "railroad", price: 200, rent: 40 },
+  { name: "Kelas Aljabar Linear", type: "property", price: 260, rent: 55 },
+  { name: "Pusat Riset Matematika", type: "property", price: 260, rent: 30 },
   { name: "Instalasi Air Kampus", type: "utility", price: 150, rent: 0 },
-  { name: "Laboratorium Fisika", type: "property", price: 280, rent: 24 },
+  { name: "Laboratorium Fisika", type: "property", price: 280, rent: 30 },
 
   { name: "Ruang Kepala Sekolah", type: "goToJail", info: "Ke Ruang Disiplin" },
-  { name: "Kelas Persamaan Diferensial", type: "property", price: 300, rent: 26 },
-  { name: "Observatorium Sains", type: "property", price: 300, rent: 26 },
+  { name: "Kelas Persamaan Diferensial", type: "property", price: 300, rent: 50 },
+  { name: "Observatorium Sains", type: "property", price: 300, rent: 45 },
   { name: "Dana Beasiswa", type: "community", info: "Ambil kartu" },
-  { name: "Pusat Olimpiade Matematika", type: "property", price: 320, rent: 28 },
-  { name: "Stasiun Riset", type: "railroad", price: 200, rent: 25 },
+  { name: "Pusat Olimpiade Matematika", type: "property", price: 320, rent: 55 },
+  { name: "Stasiun Riset", type: "railroad", price: 200, rent: 40 },
   { name: "Kartu Tantangan", type: "chance", info: "Ambil kartu" },
-  { name: "Akademi Matematika", type: "property", price: 350, rent: 35 },
+  { name: "Akademi Matematika", type: "property", price: 350, rent: 60 },
   { name: "Biaya Ujian", type: "tax", amount: 100 },
-  { name: "Universitas Matematika", type: "property", price: 400, rent: 50 }
+  { name: "Universitas Matematika", type: "property", price: 400, rent: 100 }
 ];
 
 const challengeQuestionBank = [
@@ -260,7 +260,48 @@ const communityCards = [
   { text: "Bayar biaya laboratorium $50.", amount: -50 },
   { text: "Laptop sekolah rusak. Bayar biaya perbaikan $100.", amount: -100 },
   { text: "Bayar biaya kursus tambahan $90.", amount: -90 },
-  { text: "Mendapat hadiah dari alumni. Terima $80.", amount: 80 }
+  { text: "Mendapat hadiah dari alumni. Terima $80.", amount: 80 },
+
+  { text: "Membantu guru menyiapkan kelas. Terima uang saku $30.", amount: 30 },
+  { text: "Mendapat penghargaan sebagai siswa teladan. Terima $120!", amount: 120 },
+  { text: "Menjual hasil karya di bazar sekolah. Terima $60.", amount: 60 },
+  { text: "Mendapat uang dari keluarga untuk membeli buku. Terima $70.", amount: 70 },
+  { text: "Menang kuis pengetahuan umum. Terima hadiah $45.", amount: 45 },
+  { text: "Mendapat bonus karena rajin membantu perpustakaan. Terima $55.", amount: 55 },
+  { text: "Mendapat hadiah ulang tahun dari teman-teman. Terima $100!", amount: 100 },
+  { text: "Memenangkan lomba karya ilmiah. Terima hadiah $175!", amount: 175 },
+  { text: "Mendapat uang saku tambahan. Terima $25.", amount: 25 },
+  { text: "Menemukan uang di tas lama. Terima $20.", amount: 20 },
+  { text: "Mendapat penghargaan atas proyek kelompok. Terima $85.", amount: 85 },
+  { text: "Menjadi tutor teman sekelas. Terima upah $65.", amount: 65 },
+  { text: "Mendapat bantuan dana kegiatan sekolah. Terima $130!", amount: 130 },
+  { text: "Mendapat hadiah karena membaca banyak buku. Terima $40.", amount: 40 },
+  { text: "Menang lomba cerdas cermat. Terima hadiah $150!", amount: 150 },
+  { text: "Mendapat uang dari menjual kerajinan tangan. Terima $90.", amount: 90 },
+  { text: "Mendapat bonus karena hadir tepat waktu. Terima $35.", amount: 35 },
+  { text: "Menerima hadiah dari kakak kelas. Terima $50.", amount: 50 },
+  { text: "Mendapat penghargaan sebagai anggota klub terbaik. Terima $110!", amount: 110 },
+
+  { text: "Buku pelajaran hilang. Beli pengganti seharga $45.", amount: -45 },
+  { text: "Terlambat mengembalikan buku perpustakaan. Bayar denda $20.", amount: -20 },
+  { text: "Bayar biaya pendaftaran lomba sekolah $35.", amount: -35 },
+  { text: "Peralatan praktikum rusak. Bayar ganti rugi $80.", amount: -80 },
+  { text: "Bayar biaya fotokopi materi pelajaran $15.", amount: -15 },
+  { text: "Seragammu perlu diperbaiki. Bayar $30.", amount: -30 },
+  { text: "Bayar biaya perjalanan untuk kegiatan sekolah $60.", amount: -60 },
+  { text: "Kehilangan alat tulis. Beli pengganti seharga $25.", amount: -25 },
+  { text: "Bayar iuran klub sekolah $40.", amount: -40 },
+  { text: "Membeli buku latihan tambahan. Bayar $55.", amount: -55 },
+  { text: "Bayar biaya pemeliharaan komputer sekolah $70.", amount: -70 },
+  { text: "Membayar biaya kegiatan kelas $50.", amount: -50 },
+  { text: "Kartu pelajar hilang. Bayar biaya penggantian $20.", amount: -20 },
+  { text: "Bayar biaya bahan untuk proyek sains $65.", amount: -65 },
+  { text: "Sepatumu rusak. Bayar biaya perbaikan $45.", amount: -45 },
+  { text: "Bayar denda karena terlambat mengumpulkan tugas $30.", amount: -30 },
+  { text: "Membeli kalkulator baru untuk pelajaran matematika. Bayar $100.", amount: -100 },
+  { text: "Bayar biaya makan saat kegiatan sekolah $25.", amount: -25 },
+  { text: "Membantu memperbaiki papan kelas. Bayar biaya bahan $35.", amount: -35 },
+  { text: "Bayar biaya kebersihan kelas $15.", amount: -15 }
 ];
 
 let players = [];
