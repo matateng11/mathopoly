@@ -355,9 +355,10 @@ function render() {
       ? `<div class="tile-owner">Milik ${ownerName}</div>`
       : "";
     const tileColor = hasOwner ? players[tile.owner].color : "";
+    const tileClass = tile.type === "free" ? " rest-tile" : "";
 
     return `
-      <div class="tile ${players[currentPlayer].position === index ? "current" : ""}"
+      <div class="tile${tileClass} ${players[currentPlayer].position === index ? "current" : ""}"
         style="grid-column:${position.gridColumn}; grid-row:${position.gridRow}; ${tileColor ? `background-color:${tileColor};` : ""}">
         <div>
           <div class="tile-name">${escapeHtml(tile.name)}</div>
