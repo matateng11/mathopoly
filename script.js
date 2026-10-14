@@ -434,17 +434,12 @@ function escapeHtml(value) {
 }
 
 function getBoardPosition(index) {
-  if (index <= 10) {
-    return { gridColumn: 11 - index, gridRow: 10 };
-  }
-  if (index <= 20) {
-    return { gridColumn: 1, gridRow: 20 - index };
-  }
-  if (index <= 30) {
-    return { gridColumn: index - 19, gridRow: 1 };
-  }
-  return { gridColumn: 10, gridRow: Math.min(index - 29, 10) };
+  if (index <= 10) return { gridColumn: 11 - index, gridRow: 10 };
+  if (index <= 19) return { gridColumn: 1, gridRow: 20 - index };
+  if (index <= 29) return { gridColumn: index - 19, gridRow: 1 };
+  return { gridColumn: 10, gridRow: index - 29 };
 }
+
 function wait(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
