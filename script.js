@@ -51,7 +51,6 @@ const diceIcons = [
 
 const tiles = [
   { name: "Mulai Belajar", type: "start", info: "Lewat: +$200" },
-  { name: "Kelas Aljabar", type: "property", price: 90, rent: 20 },
   { name: "Dana Beasiswa", type: "community", info: "Ambil kartu" },
   { name: "Ruang Aritmetika", type: "property", price: 90, rent: 30 },
   { name: "Pajak Praktikum", type: "tax", amount: 200 },
