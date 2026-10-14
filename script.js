@@ -435,20 +435,15 @@ function escapeHtml(value) {
 }
 
 function getBoardPosition(index) {
-  // Empat sudut tetap di indeks 0, 10, 20, dan 30.
   if (index <= 10) {
     return { gridColumn: 11 - index, gridRow: 10 };
   }
-
   if (index <= 20) {
     return { gridColumn: 1, gridRow: 20 - index };
   }
-
   if (index <= 30) {
     return { gridColumn: index - 19, gridRow: 1 };
   }
-
-  // Untuk 39 petak, indeks terakhir (38) berada di kolom 10.
   return { gridColumn: 10, gridRow: Math.min(index - 29, 10) };
 }
 function wait(ms) {
