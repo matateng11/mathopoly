@@ -519,3 +519,14 @@ button.secondary:hover:not(:disabled) {
     z-index: 2;
   }
 }
+
+.tile.rest-tile .tile-name {
+  font-size: 12px;
+  line-height: 1.2;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.tile.rest-tile {
+  background-color: #d9f2e6;
+}
