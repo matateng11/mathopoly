@@ -96,77 +96,155 @@ const tiles = [
 ];
 
 const challengeQuestionBank = [
-  {
-    topic: "Negasi",
-    question: "Jika p adalah “Hari ini hujan”, apa negasi dari p?",
-    options: ["Hari ini tidak hujan", "Besok hujan", "Hari ini cerah dan hujan", "Hari ini mungkin hujan"],
+  { //1
+    question: "Hasil penyederhanaan dari 5x + 3x - 2x + 4 = ...",
+    options: ["6x + 4", "10x + 4", "6x - 4", "8x + 4"],
     answer: 0
   },
-  {
-    topic: "Konjungsi",
-    question: "Konjungsi p ∧ q bernilai benar jika...",
-    options: ["p dan q keduanya benar", "p atau q benar", "p salah dan q benar", "p dan q keduanya salah"],
+  { //2
+    question: "Hasil penyederhanaan dari 4a + 3b - 2a + 5b = ...",
+    options: ["2a + 8b", "6a + 2b", "2a + 2b", "6a + 8b"],
     answer: 0
   },
-  {
-    topic: "Disjungsi",
-    question: "Disjungsi p ∨ q bernilai salah jika...",
-    options: ["p dan q keduanya salah", "p dan q keduanya benar", "p benar saja", "q benar saja"],
+  { //3
+    question: "Hasil dari 3(2x + 4) - 2x adalah",
+    options: ["6x + 12", "4x + 12", "4x + 4", "8x + 13"],
+    answer: 1
+  },
+  { //4
+    question: "Hasil dari (5x + 7) - (2x - 3) adalah",
+    options: ["3x + 4", "7x + 10", "3x + 10", "3x - 10"],
+    answer: 2
+  },
+  { //5
+    question: "Hasil dari 2x(3x + 4) adalah",
+    options: ["6x² + 8x", "6x + 8", "5x² + 4x", "6x² + 4x"],
     answer: 0
   },
-  {
-    topic: "Implikasi",
-    question: "Pernyataan p → q bernilai salah ketika...",
-    options: ["p benar dan q salah", "p salah dan q benar", "p dan q benar", "p dan q salah"],
+  { //6
+    question: "Hasil dari 12x² : 3x adalah",
+    options: ["4x²", "4x", "9x", "4x"],
+    answer: 1
+  },
+  { //7
+    question: "Nilai x yang memenuhi 4x + 7 = 23 adalah",
+    options: ["3", "5", "4", "6"],
+    answer: 2
+  },
+  {//8
+    question: "Nilai x yang memenuhi 3(x - 2) = 15 adalah",
+    options: ["3", "5", "9", "7"],
+    answer: 3
+  },
+  {//9
+    question: "tentukan x dari 5x + 4 = 2x + 16",
+    options: ["3", "4", "5", "6"],
+    answer: 1
+  },
+  {//10
+    question: "tentukan x dari persamaan x² + 5x + 6 = 0",
+    options: ["x = -2 atau x = -3", "x = 2 atau x = 3", "x = -1 atau x = -6", "x = 1 atau x = 6"],
     answer: 0
   },
-  {
-    topic: "Biimplikasi",
-    question: "Pernyataan p ↔ q bernilai benar ketika...",
-    options: ["Nilai kebenaran p dan q sama", "p selalu benar", "q selalu salah", "Nilai kebenaran p dan q berbeda"],
+  {//11
+    question: "Hasil penyederhanaan dari 6x - 3 + 2x + 7 adalah",
+    options: ["8x + 4", "8x - 4", "4x + 8", "8x + 10"],
     answer: 0
   },
-  {
-    topic: "Limit aljabar",
-    question: "Nilai lim x→2 (x + 3) adalah...",
-    options: ["5", "3", "2", "6"],
+  {//12
+    question: "Hasil dari 2(3a - 4) + 5a adalah",
+    options: ["11a - 8", "6a - 8", "11a + 8", "6a + 8"],
     answer: 0
   },
-  {
-    topic: "Limit aljabar",
-    question: "Nilai lim x→3 (x² − 9)/(x − 3) adalah...",
-    options: ["6", "3", "9", "0"],
+  {//13
+      question: "tentukan x dari 3x - 5 = 16",
+      options: ["5","6","7","8"],
+      answer: 2
+  },
+   {//14
+      question: "Tentukan persamaan dari (x + 3) (x + 2)",
+      options: ["x² + 5x + 6","x² + 6x + 5","x² + 5x + 5","x² + 5"],
+      answer: 0
+  },
+  {//15
+      question: "tentukan x dari persamaan x² - 7x + 12 = 0",
+      options: ["x = 2 atau x = 6","x = 3 atau x = 4","x = -3 atau x = -4","x = 7 atau x = 12"],
+      answer: 1
+  },
+  {//1
+    question: "Jika f(x) = 3x - 5, berapakah rumus fungsi inversnya f⁻¹(x)?",
+    options: ["3x + 5", "3/(x + 5)", "(x - 5)/3", "(x + 5)/3"],
+    answer: 3
+  },
+  {//2
+    question: "Berapakah hasil penyederhanaan bentuk eksponen 2³ · 2⁴?",
+    options: ["2⁷", "9⁷", "4¹²", "2¹²"],
     answer: 0
   },
-  {
-    topic: "Matematika dasar",
-    question: "Hasil dari ¾ + ½ adalah...",
-    options: ["1¼", "1", "¾", "1½"],
+  {//3
+    question: "Berapakah hasil dari bentuk perpangkatan 5⁶ / 5⁴?",
+    options: ["125", "2", "5", "25"],
+    answer: 3
+  },
+  {//4
+    question: "Jika diketahui 2x + y = 7 dan x = 2, berapakah nilai y?",
+    options: ["7", "3", "-3", "5"],
+    answer: 1
+  },
+  {//5
+    question: "Berapakah hasil pemfaktoran bentuk aljabar kuadrat x² - 9?",
+    options: ["(x + 3)(x + 3)", "(x - 9)(x + 1)", "(x - 3)(x + 3)", "(x - 3)(x - 3)"],
+    answer: 2
+  },
+  {//6
+    question: "Jika diketahui f(x) = x² - 2x, berapakah nilai fungsi untuk f(-3)?",
+    options: ["3", "15", "-3", "11"],
+    answer: 1
+  },
+  {//7
+    question: "Berapakah hasil pemfaktoran dari bentuk kuadrat x² - 5x + 6?",
+    options: ["(x + 1)(x + 6)", "(x - 1)(x - 6)", "(x - 2)(x - 3)", "(x + 2)(x + 3)"],
+    answer: 2
+  },
+  {//8
+    question: "Jika akar-akar persamaan kuadrat x² - 5x + 6 = 0 adalah x₁ dan x₂, berapakah hasil penjumlahan akar-akarnya?",
+    options: ["5", "-5", "6", "-6"],
     answer: 0
   },
-  {
-    topic: "Matematika dasar",
-    question: "Jika 3x + 5 = 20, nilai x adalah...",
-    options: ["5", "3", "8", "15"],
-    answer: 0
+  {//9
+    question: "Jika akar-akar persamaan kuadrat x² - 7x + 12 = 0 adalah x₁ dan x₂, berapakah hasil kali akar-akarnya?",
+    options: ["-7", "7", "-12", "12"],
+    answer: 3
   },
-  {
-    topic: "Matematika dasar",
-    question: "FPB dari 18 dan 24 adalah...",
-    options: ["6", "3", "8", "12"],
-    answer: 0
+  {//10
+    question: "Hasil dari penjumlahan bentuk aljabar (2x + 3) + (x + 1) adalah",
+    options: ["3x + 3", "4x + 3", "3x + 4", "2x + 4"],
+    answer: 2
   },
-  {
-    topic: "Geometri",
-    question: "Berapa banyak garis melalui dua titik berbeda?",
-    options: ["Tepat satu garis", "Dua garis", "Tidak ada garis", "Tak terhingga"],
-    answer: 0
+  {//11
+    question: "Penyelesaian dari persamaan linier satu variabel x + 7 = 12 adalah",
+    options: ["x = 2", "x = 19", "x = 6", "x = 5"],
+    answer: 3
   },
-  {
-    topic: "Geometri",
-    question: "Dua garis yang tidak pernah berpotongan disebut...",
-    options: ["Garis sejajar", "Garis tegak lurus", "Garis berpotongan", "Garis lengkung"],
-    answer: 0
+  {//12
+    question: "Berapakah hasil penyederhanaan bentuk eksponen 3² · 3³?",
+    options: ["9⁵", "3⁵", "3⁶", "9⁵"],
+    answer: 1
+  },
+  {//13
+    question: "Berapakah nilai dari bentuk perpangkatan (3²)²?",
+    options: ["27", "18", "9", "81"],
+    answer: 3
+  },
+  {//14
+    question: "Berapakah nilai dari 7⁰?",
+    options: ["0", "7", "-1", "1"],
+    answer: 3
+  },
+  {//15
+    question: "Berapakah bentuk sederhana dari 2⁻³?",
+    options: ["-1/8", "1/8", "-8", "8"],
+    answer: 1
   }
 ];
 
@@ -452,7 +530,7 @@ function showChallengeQuestion() {
 
   challengeAnswered = false;
   challengeProgress.textContent =
-    `Soal ${challengeQuestionIndex + 1} dari ${CHALLENGE_QUESTION_COUNT} · ${item.topic}`;
+    `Soal ${challengeQuestionIndex + 1} dari ${CHALLENGE_QUESTION_COUNT}`;
   challengeQuestionEl.textContent = item.question;
   challengeFeedback.textContent = "";
   challengeOptionsEl.innerHTML = "";
