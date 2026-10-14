@@ -51,6 +51,7 @@ const diceIcons = [
 
 const tiles = [
   { name: "Mulai Belajar", type: "start", info: "Lewat: +$200" },
+  { name: "Kelas Aljabar", type: "property", price: 90, rent: 20 },
   { name: "Dana Beasiswa", type: "community", info: "Ambil kartu" },
   { name: "Ruang Aritmetika", type: "property", price: 90, rent: 30 },
   { name: "Pajak Praktikum", type: "tax", amount: 200 },
@@ -434,10 +435,19 @@ function escapeHtml(value) {
 }
 
 function getBoardPosition(index) {
-  if (index <= 10) return { gridColumn: 11 - index, gridRow: 10 };
-  if (index <= 19) return { gridColumn: 1, gridRow: 20 - index };
-  if (index <= 29) return { gridColumn: index - 19, gridRow: 1 };
-  return { gridColumn: 10, gridRow: index - 29 };
+  if (index <= 10) {
+    return { gridColumn: 11 - index, gridRow: 11 };
+  }
+
+  if (index <= 20) {
+    return { gridColumn: 1, gridRow: 21 - index };
+  }
+
+  if (index <= 30) {
+    return { gridColumn: index - 19, gridRow: 1 };
+  }
+
+  return { gridColumn: 11, gridRow: index - 29 };
 }
 
 function wait(ms) {
