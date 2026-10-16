@@ -1,5 +1,6 @@
 "use strict";
 
+const startingMoneyEl = document.getElementById("startingMoney");
 const playerCountEl = document.getElementById("playerCount");
 const playerNamesEl = document.getElementById("playerNames");
 const playerSetupEl = document.querySelector(".player-setup");
@@ -346,7 +347,7 @@ function newGame() {
       icon: playerIcons[index],
       color: playerColors[index],
       position: 0,
-      money: STARTING_MONEY
+      money: Math.max(1, Number(startingMoneyEl.value) || STARTING_MONEY)
     };
   });
 
